@@ -67,12 +67,22 @@ void bootmagic(void)
     if (bootmagic_scan_keycode(BOOTMAGIC_KEY_CAPSLOCK_TO_CONTROL)) {
         keymap_config.capslock_to_control = !keymap_config.capslock_to_control;
     }
-    if (bootmagic_scan_keycode(BOOTMAGIC_KEY_SWAP_LALT_LGUI)) {
-        keymap_config.swap_lalt_lgui = !keymap_config.swap_lalt_lgui;
+    if (bootmagic_scan_keycode(BOOTMAGIC_KEY_SWAP_ALT_CAPSLOCK)) {
+        keymap_config.swap_alt_capslock = !keymap_config.swap_alt_capslock;
     }
-    if (bootmagic_scan_keycode(BOOTMAGIC_KEY_SWAP_RALT_RGUI)) {
-        keymap_config.swap_ralt_rgui = !keymap_config.swap_ralt_rgui;
+    if (bootmagic_scan_keycode(BOOTMAGIC_KEY_CAPSLOCK_TO_ALT)) {
+        keymap_config.capslock_to_alt = !keymap_config.capslock_to_alt;
     }
+    if (bootmagic_scan_keycode(BOOTMAGIC_KEY_UNSWAP_ALL)) {
+        keymap_config.swap_control_capslock = false;
+        keymap_config.swap_alt_capslock = false;
+    }
+    /* if (bootmagic_scan_keycode(BOOTMAGIC_KEY_SWAP_LALT_LGUI)) { */
+    /*     keymap_config.swap_lalt_lgui = !keymap_config.swap_lalt_lgui; */
+    /* } */
+    /* if (bootmagic_scan_keycode(BOOTMAGIC_KEY_SWAP_RALT_RGUI)) { */
+    /*     keymap_config.swap_ralt_rgui = !keymap_config.swap_ralt_rgui; */
+    /* } */
     if (bootmagic_scan_keycode(BOOTMAGIC_KEY_NO_GUI)) {
         keymap_config.no_gui = !keymap_config.no_gui;
     }

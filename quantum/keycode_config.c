@@ -26,19 +26,28 @@ uint16_t keycode_config(uint16_t keycode) {
             if (keymap_config.swap_control_capslock || keymap_config.capslock_to_control) {
                 return KC_LCTL;
             }
+            if (keymap_config.swap_alt_capslock || keymap_config.capslock_to_alt) {
+                return KC_LALT;
+            }
             return keycode;
+            /* return KC_CAPSLOCK; */
         case KC_LCTL:
             if (keymap_config.swap_control_capslock) {
                 return KC_CAPSLOCK;
             }
             return KC_LCTL;
         case KC_LALT:
-            if (keymap_config.swap_lalt_lgui) {
-                if (keymap_config.no_gui) {
-                    return KC_NO;
-                }
-                return KC_LGUI;
+            if (keymap_config.swap_alt_capslock) {
+                return KC_CAPSLOCK;
             }
+            return KC_LALT;
+        /* case KC_LALT: */
+        /*     if (keymap_config.swap_lalt_lgui) { */
+        /*         if (keymap_config.no_gui) { */
+        /*             return KC_NO; */
+        /*         } */
+        /*         return KC_LGUI; */
+        /*     } */
             return KC_LALT;
         case KC_LGUI:
             if (keymap_config.swap_lalt_lgui) {

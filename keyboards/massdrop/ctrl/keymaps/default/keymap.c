@@ -2,12 +2,18 @@
 
 enum ctrl_keycodes {
     U_T_AUTO = SAFE_RANGE, //USB Extra Port Toggle Auto Detect / Always Active
-    U_T_AGCR,              //USB Toggle Automatic GCR control
-    DBG_TOG,               //DEBUG Toggle On / Off
-    DBG_MTRX,              //DEBUG Toggle Matrix Prints
-    DBG_KBD,               //DEBUG Toggle Keyboard Prints
-    DBG_MOU,               //DEBUG Toggle Mouse Prints
-    MD_BOOT,               //Restart into bootloader after hold timeout
+    U_T_AGCR,           //USB Toggle Automatic GCR control                          //Working
+    DBG_TOG,            //DEBUG Toggle On / Off                                     //
+    DBG_MTRX,           //DEBUG Toggle Matrix Prints                                //
+    DBG_KBD,            //DEBUG Toggle Keyboard Prints                              //
+    DBG_MOU,            //DEBUG Toggle Mouse Prints                                 //
+    MD_BOOT             //Restart into bootloader after hold timeout                //Working
+};
+
+enum ctrl_layers {
+    _DEFAULT,
+    _FUNCTION,
+    _FF14
 };
 
 #define TG_NKRO MAGIC_TOGGLE_NKRO //Toggle 6KRO / NKRO mode
@@ -15,21 +21,29 @@ enum ctrl_keycodes {
 keymap_config_t keymap_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT(
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, KC_PAUS, \
+    [_DEFAULT] = LAYOUT(
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR,TO(_FF14),KC_PAUS, \
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
         KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT, \
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,                              KC_UP, \
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_LSFT,                              KC_UP, \
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(1),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
     ),
-    [1] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU, \
-        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD, \
-        _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
-        _______, RGB_TOG, _______, _______, _______, MD_BOOT, TG_NKRO, _______, _______, _______, _______, _______,                              _______, \
-        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______ \
+    [_FUNCTION] = LAYOUT(
+        KC_NO,   KC_NO,   KC_NO,   KC_MPRV, KC_MPLY, KC_MNXT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_CALC, KC_NO,              RGB_TOG, BL_TOGG, BL_BRTG, \
+        KC_NO,   RGB_SPD, RGB_SPI, RGB_VAD, RGB_VAI, KC_NO,   KC_NO,   KC_NO,   KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_NO,   KC_BSPC,   RGB_MOD, BL_INC,  KC_VOLU, \
+        KC_NO,   KC_NO,   KC_BTN1, KC_MS_U, KC_BTN2, KC_NO,   KC_NO,   KC_NO,   KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_NO,   KC_NO,     RGB_RMOD,BL_DEC,  KC_VOLD, \
+MAGIC_UNSWAP_ALL,KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO,   KC_NO,   KC_P4,   KC_P5,   KC_P6,   KC_PDOT, KC_PENT,\
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RESET,   TG_NKRO, KC_NO,   KC_P1,   KC_P2,   KC_P3,   KC_NO,                                RGB_SAI, \
+        MAGIC_SWAP_CONTROL_CAPSLOCK, KC_NO, MAGIC_SWAP_ALT_CAPSLOCK,   KC_NO,            KC_P0,   KC_TRNS, KC_NO, KC_NO,                RGB_HUD, RGB_SAD, RGB_HUI \
+    ),
+    [_FF14] = LAYOUT(
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,        KC_PSCR, TO(_DEFAULT), KC_PAUS, \
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
+        KC_TAB,  KC_Q,    KC_F2,   KC_E,    KC_F3,   KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
+        KC_LALT, KC_F1,   KC_S,    KC_D,    KC_F,    KC_F4,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT, \
+        KC_LSFT, KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_LSFT,                              KC_UP, \
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(_FUNCTION),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     /*
     [X] = LAYOUT(
@@ -42,6 +56,114 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     */
 };
+
+void rgb_matrix_indicators_user(void)
+{
+	uint8_t this_led = host_keyboard_leds();
+
+	if (!g_suspend_state && rgb_matrix_config.enable) {
+		switch (biton32(layer_state)) {
+		case _FUNCTION:
+			if (this_led & (1 << USB_LED_NUM_LOCK)) {
+				rgb_matrix_set_color(24, 0xFF, 0xFF, 0xFF);
+			} else {
+				rgb_matrix_set_color(24, 0x00, 0x00, 0x00);
+			}
+            // F-Keys
+			rgb_matrix_set_color(3,  0x66, 0xCC, 0xFF); // f3 (prev)
+			rgb_matrix_set_color(4,  0x66, 0xCC, 0xFF); // f4 (play/pause)
+			rgb_matrix_set_color(5,  0x66, 0xCC, 0xFF); // f5 (next)
+			rgb_matrix_set_color(11, 0x66, 0xCC, 0xFF); // f11 (calc)
+
+            // TKL Area
+			rgb_matrix_set_color(13, 0xD6, 0xF5, 0xF5); // print (tog_rgb)
+			rgb_matrix_set_color(30, 0x33, 0xCC, 0xCC); // ins (matrix next)
+			rgb_matrix_set_color(47, 0x99, 0xE6, 0xE6); // del (matrix prev)
+			/* rgb_matrix_set_color(32, 0x00, 0xFF, 0xCC); // home (bl useless) */
+			/* rgb_matrix_set_color(49, 0x80, 0xFF, 0xE5); // end (bl_d useless) */
+			rgb_matrix_set_color(32, 0x00, 0xFF, 0xCC); // pg_up (volu)
+			rgb_matrix_set_color(49, 0x80, 0xFF, 0xE5); // pg_dn (vold)
+
+            // caps/shift/ctrl
+			rgb_matrix_set_color(50, 0xFF, 0x00, 0x66); // caps
+			rgb_matrix_set_color(76, 0xFF, 0x00, 0x66); // ctrl
+			rgb_matrix_set_color(78, 0xFF, 0x00, 0x66); // alt
+
+            // rgb settings
+			rgb_matrix_set_color(17, 0xFF, 0x00, 0x66); // 1
+			rgb_matrix_set_color(18, 0xFF, 0x00, 0x66); // 2
+			rgb_matrix_set_color(19, 0xFF, 0x00, 0xFF); // 3
+			rgb_matrix_set_color(20, 0xFF, 0x00, 0xFF); // 4
+
+			// ESDF
+			rgb_matrix_set_color(35, 0x21, 0xBD, 0xA9);
+			rgb_matrix_set_color(36, 0xCC, 0x99, 0xFF);
+			rgb_matrix_set_color(37, 0x21, 0xBD, 0xA9); // W E R
+			rgb_matrix_set_color(52, 0xCC, 0x99, 0xFF); // S D F
+			rgb_matrix_set_color(53, 0xCC, 0x99, 0xFF);
+			rgb_matrix_set_color(54, 0xCC, 0x99, 0xFF);
+
+			// numpad
+			rgb_matrix_set_color(24, 0xE1, 0x51, 0x6E);
+			rgb_matrix_set_color(25, 0xE1, 0x51, 0x6E);
+			rgb_matrix_set_color(26, 0xE1, 0x51, 0x6E); // Num / * -
+			rgb_matrix_set_color(27, 0xE1, 0x51, 0x6E);
+			rgb_matrix_set_color(41, 0xDA, 0x25, 0x49); 
+			rgb_matrix_set_color(42, 0xDA, 0x25, 0x49); // 7 8 9 +
+			rgb_matrix_set_color(43, 0xDA, 0x25, 0x49); 
+			rgb_matrix_set_color(44, 0xDA, 0x25, 0x49);
+			rgb_matrix_set_color(58, 0xAE, 0x1E, 0x3B); 
+			rgb_matrix_set_color(59, 0xAE, 0x1E, 0x3B); // 4 5 6 . Enter
+			rgb_matrix_set_color(60, 0xAE, 0x1E, 0x3B);
+			rgb_matrix_set_color(61, 0xAE, 0x1E, 0x3B);
+			rgb_matrix_set_color(62, 0xFF, 0x00, 0x66);
+			rgb_matrix_set_color(71, 0x83, 0x16, 0x2c); // 1 2 3
+			rgb_matrix_set_color(72, 0x83, 0x16, 0x2c);
+			rgb_matrix_set_color(73, 0x83, 0x16, 0x2c);
+			rgb_matrix_set_color(79, 0x57, 0x0F, 0x1E);
+
+            // Fn key
+			rgb_matrix_set_color(81, 0xFF, 0xFF, 0xFF);
+			break;
+
+		case _FF14: {
+            // tilde/tab/caps/shift/ctrl
+			rgb_matrix_set_color(16, 0xFF, 0x00, 0x66); // tilde
+			rgb_matrix_set_color(33, 0xFF, 0x00, 0x66); // tab
+			rgb_matrix_set_color(50, 0xFF, 0x00, 0x66); // alt (caps)
+			rgb_matrix_set_color(63, 0xFF, 0x00, 0x66); // shift
+			rgb_matrix_set_color(76, 0xFF, 0x00, 0x66); // ctrl
+
+            // Nums 1-6
+			rgb_matrix_set_color(17, 0x72, 0x00, 0xFF); // 1
+			rgb_matrix_set_color(18, 0x72, 0x00, 0xFF); // 2
+			rgb_matrix_set_color(19, 0x72, 0x00, 0xFF); // 3
+			rgb_matrix_set_color(20, 0x72, 0x00, 0xFF); // 4
+			rgb_matrix_set_color(21, 0x72, 0x00, 0xFF); // 5
+			rgb_matrix_set_color(22, 0x72, 0x00, 0xFF); // 6
+            // Nums 7-= (bottom row)
+			rgb_matrix_set_color(64, 0x72, 0x00, 0xFF); // 7
+			rgb_matrix_set_color(65, 0x72, 0x00, 0xFF); // 8
+			rgb_matrix_set_color(66, 0x72, 0x00, 0xFF); // 9
+			rgb_matrix_set_color(67, 0x72, 0x00, 0xFF); // 0
+			rgb_matrix_set_color(68, 0x72, 0x00, 0xFF); // -
+			rgb_matrix_set_color(69, 0x72, 0x00, 0xFF); // =
+
+			// ESDF
+			rgb_matrix_set_color(14, 0xFF, 0xFF, 0xFF); // Scroll Lock; (show enabled)
+			rgb_matrix_set_color(35, 0x21, 0xBD, 0xA9); // W - F2
+			rgb_matrix_set_color(36, 0xCC, 0x99, 0xFF); // E
+			rgb_matrix_set_color(37, 0x21, 0xBD, 0xA9); // R - F3
+			rgb_matrix_set_color(51, 0x21, 0xBD, 0xA9); // A - F1
+			rgb_matrix_set_color(52, 0xCC, 0x99, 0xFF);
+			rgb_matrix_set_color(53, 0xCC, 0x99, 0xFF); // S D F
+			rgb_matrix_set_color(54, 0xCC, 0x99, 0xFF);
+			rgb_matrix_set_color(55, 0x21, 0xBD, 0xA9); // G - F4
+		    break;
+		    }
+		}
+	}
+}
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
@@ -98,33 +220,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case RGB_TOG:
-            if (record->event.pressed) {
-              switch (rgb_matrix_get_flags()) {
-                case LED_FLAG_ALL: {
-                    rgb_matrix_set_flags(LED_FLAG_KEYLIGHT);
-                    rgb_matrix_set_color_all(0, 0, 0);
-                  }
-                  break;
-                case LED_FLAG_KEYLIGHT: {
-                    rgb_matrix_set_flags(LED_FLAG_UNDERGLOW);
-                    rgb_matrix_set_color_all(0, 0, 0);
-                  }
-                  break;
-                case LED_FLAG_UNDERGLOW: {
-                    rgb_matrix_set_flags(LED_FLAG_NONE);
-                    rgb_matrix_disable_noeeprom();
-                  }
-                  break;
-                default: {
-                    rgb_matrix_set_flags(LED_FLAG_ALL);
-                    rgb_matrix_enable_noeeprom();
-                  }
-                  break;
-              }
-            }
-            return false;
         default:
             return true; //Process all other keycodes normally
     }
 }
+

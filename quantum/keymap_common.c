@@ -54,7 +54,7 @@ action_t action_for_key(uint8_t layer, keypos_t key)
             action.code = keymap_function_id_to_action(FN_INDEX(keycode));
             break;
         case KC_A ... KC_EXSEL:
-        case KC_LCTRL ... KC_RGUI:
+        case KC_LCTRL ... KC_RCTRL:
             action.code = ACTION_KEY(keycode);
             break;
         case KC_SYSTEM_POWER ... KC_SYSTEM_WAKE:

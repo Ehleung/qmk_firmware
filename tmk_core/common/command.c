@@ -286,8 +286,10 @@ static void print_eeconfig(void)
     print("keymap_config.raw: "); print_hex8(kc.raw); print("\n");
     print(".swap_control_capslock: "); print_dec(kc.swap_control_capslock); print("\n");
     print(".capslock_to_control: "); print_dec(kc.capslock_to_control); print("\n");
-    print(".swap_lalt_lgui: "); print_dec(kc.swap_lalt_lgui); print("\n");
-    print(".swap_ralt_rgui: "); print_dec(kc.swap_ralt_rgui); print("\n");
+    print(".swap_alt_capslock: "); print_dec(kc.swap_alt_capslock); print("\n");
+    print(".capslock_to_alt: "); print_dec(kc.capslock_to_alt); print("\n");
+    /* print(".swap_lalt_lgui: "); print_dec(kc.swap_lalt_lgui); print("\n"); */
+    /* print(".swap_ralt_rgui: "); print_dec(kc.swap_ralt_rgui); print("\n"); */
     print(".no_gui: "); print_dec(kc.no_gui); print("\n");
     print(".swap_grave_esc: "); print_dec(kc.swap_grave_esc); print("\n");
     print(".swap_backslash_backspace: "); print_dec(kc.swap_backslash_backspace); print("\n");

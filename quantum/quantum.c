@@ -570,16 +570,18 @@ bool process_record_quantum(keyrecord_t *record) {
         switch (keycode)
         {
           case MAGIC_SWAP_CONTROL_CAPSLOCK:
-            keymap_config.swap_control_capslock = true;
+            keymap_config.swap_alt_capslock = false;
+            keymap_config.swap_control_capslock = !keymap_config.swap_control_capslock;
             break;
           case MAGIC_CAPSLOCK_TO_CONTROL:
             keymap_config.capslock_to_control = true;
             break;
-          case MAGIC_SWAP_LALT_LGUI:
-            keymap_config.swap_lalt_lgui = true;
+          case MAGIC_SWAP_ALT_CAPSLOCK:
+            keymap_config.swap_control_capslock = false;
+            keymap_config.swap_alt_capslock = !keymap_config.swap_alt_capslock;
             break;
-          case MAGIC_SWAP_RALT_RGUI:
-            keymap_config.swap_ralt_rgui = true;
+          case MAGIC_CAPSLOCK_TO_ALT:
+            keymap_config.capslock_to_alt = true;
             break;
           case MAGIC_NO_GUI:
             keymap_config.no_gui = true;
@@ -593,25 +595,35 @@ bool process_record_quantum(keyrecord_t *record) {
           case MAGIC_HOST_NKRO:
             keymap_config.nkro = true;
             break;
-          case MAGIC_SWAP_ALT_GUI:
-            keymap_config.swap_lalt_lgui = true;
-            keymap_config.swap_ralt_rgui = true;
-            #ifdef AUDIO_ENABLE
-              PLAY_SONG(ag_swap_song);
-            #endif
-            break;
+          /* case MAGIC_SWAP_ALT_GUI: */
+          /*   keymap_config.swap_lalt_lgui = true; */
+          /*   keymap_config.swap_ralt_rgui = true; */
+          /*   #ifdef AUDIO_ENABLE */
+          /*     PLAY_SONG(ag_swap_song); */
+          /*   #endif */
+          /*   break; */
           case MAGIC_UNSWAP_CONTROL_CAPSLOCK:
             keymap_config.swap_control_capslock = false;
             break;
           case MAGIC_UNCAPSLOCK_TO_CONTROL:
             keymap_config.capslock_to_control = false;
             break;
-          case MAGIC_UNSWAP_LALT_LGUI:
-            keymap_config.swap_lalt_lgui = false;
+          case MAGIC_UNSWAP_ALT_CAPSLOCK:
+            keymap_config.swap_alt_capslock = false;
             break;
-          case MAGIC_UNSWAP_RALT_RGUI:
-            keymap_config.swap_ralt_rgui = false;
+          case MAGIC_UNCAPSLOCK_TO_ALT:
+            keymap_config.capslock_to_alt = false;
             break;
+          case MAGIC_UNSWAP_ALL:
+            keymap_config.swap_control_capslock = false;
+            keymap_config.swap_alt_capslock = false;
+            break;
+          /* case MAGIC_UNSWAP_LALT_LGUI: */
+          /*   keymap_config.swap_lalt_lgui = false; */
+          /*   break; */
+          /* case MAGIC_UNSWAP_RALT_RGUI: */
+          /*   keymap_config.swap_ralt_rgui = false; */
+          /*   break; */
           case MAGIC_UNNO_GUI:
             keymap_config.no_gui = false;
             break;
@@ -624,24 +636,24 @@ bool process_record_quantum(keyrecord_t *record) {
           case MAGIC_UNHOST_NKRO:
             keymap_config.nkro = false;
             break;
-          case MAGIC_UNSWAP_ALT_GUI:
-            keymap_config.swap_lalt_lgui = false;
-            keymap_config.swap_ralt_rgui = false;
-            #ifdef AUDIO_ENABLE
-              PLAY_SONG(ag_norm_song);
-            #endif
-            break;
-          case MAGIC_TOGGLE_ALT_GUI:
-            keymap_config.swap_lalt_lgui = !keymap_config.swap_lalt_lgui;
-            keymap_config.swap_ralt_rgui = !keymap_config.swap_ralt_rgui;
-            #ifdef AUDIO_ENABLE
-              if (keymap_config.swap_ralt_rgui) {
-                PLAY_SONG(ag_swap_song);
-              } else {
-                PLAY_SONG(ag_norm_song);
-              }
-            #endif
-            break;
+          /* case MAGIC_UNSWAP_ALT_GUI: */
+          /*   keymap_config.swap_lalt_lgui = false; */
+          /*   keymap_config.swap_ralt_rgui = false; */
+          /*   #ifdef AUDIO_ENABLE */
+          /*     PLAY_SONG(ag_norm_song); */
+          /*   #endif */
+          /*   break; */
+          /* case MAGIC_TOGGLE_ALT_GUI: */
+          /*   keymap_config.swap_lalt_lgui = !keymap_config.swap_lalt_lgui; */
+          /*   keymap_config.swap_ralt_rgui = !keymap_config.swap_ralt_rgui; */
+          /*   #ifdef AUDIO_ENABLE */
+          /*     if (keymap_config.swap_ralt_rgui) { */
+          /*       PLAY_SONG(ag_swap_song); */
+          /*     } else { */
+          /*       PLAY_SONG(ag_norm_song); */
+          /*     } */
+          /*   #endif */
+          /*   break; */
           case MAGIC_TOGGLE_NKRO:
             keymap_config.nkro = !keymap_config.nkro;
             break;
