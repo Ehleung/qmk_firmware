@@ -120,7 +120,7 @@ void rgb_matrix_indicators_user(void)
 			rgb_matrix_set_color(71, 0x83, 0x16, 0x2c); // 1 2 3
 			rgb_matrix_set_color(72, 0x83, 0x16, 0x2c);
 			rgb_matrix_set_color(73, 0x83, 0x16, 0x2c);
-			rgb_matrix_set_color(79, 0x57, 0x0F, 0x1E);
+			rgb_matrix_set_color(80, 0x57, 0x0F, 0x1E);
 
             // Fn key
 			rgb_matrix_set_color(81, 0xFF, 0xFF, 0xFF);
@@ -135,19 +135,19 @@ void rgb_matrix_indicators_user(void)
 			rgb_matrix_set_color(76, 0xFF, 0x00, 0x66); // ctrl
 
             // Nums 1-6
-			rgb_matrix_set_color(17, 0x72, 0x00, 0xFF); // 1
-			rgb_matrix_set_color(18, 0x72, 0x00, 0xFF); // 2
-			rgb_matrix_set_color(19, 0x72, 0x00, 0xFF); // 3
-			rgb_matrix_set_color(20, 0x72, 0x00, 0xFF); // 4
-			rgb_matrix_set_color(21, 0x72, 0x00, 0xFF); // 5
-			rgb_matrix_set_color(22, 0x72, 0x00, 0xFF); // 6
+			rgb_matrix_set_color(17, 0xFF, 0x00, 0x33); // 1
+			rgb_matrix_set_color(18, 0xFF, 0x00, 0x33); // 2
+			rgb_matrix_set_color(19, 0xFF, 0x00, 0x33); // 3
+			rgb_matrix_set_color(20, 0xFF, 0x00, 0x33); // 4
+			rgb_matrix_set_color(21, 0xFF, 0x00, 0x33); // 5
+			rgb_matrix_set_color(22, 0xFF, 0x00, 0x33); // 6
             // Nums 7-= (bottom row)
-			rgb_matrix_set_color(64, 0x72, 0x00, 0xFF); // 7
-			rgb_matrix_set_color(65, 0x72, 0x00, 0xFF); // 8
-			rgb_matrix_set_color(66, 0x72, 0x00, 0xFF); // 9
-			rgb_matrix_set_color(67, 0x72, 0x00, 0xFF); // 0
-			rgb_matrix_set_color(68, 0x72, 0x00, 0xFF); // -
-			rgb_matrix_set_color(69, 0x72, 0x00, 0xFF); // =
+			rgb_matrix_set_color(64, 0xFF, 0x00, 0x33); // 7
+			rgb_matrix_set_color(65, 0xFF, 0x00, 0x33); // 8
+			rgb_matrix_set_color(66, 0xFF, 0x00, 0x33); // 9
+			rgb_matrix_set_color(67, 0xFF, 0x00, 0x33); // 0
+			rgb_matrix_set_color(68, 0xFF, 0x00, 0x33); // -
+			rgb_matrix_set_color(69, 0xFF, 0x00, 0x33); // =
 
 			// ESDF
 			rgb_matrix_set_color(14, 0xFF, 0xFF, 0xFF); // Scroll Lock; (show enabled)
