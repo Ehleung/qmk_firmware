@@ -13,7 +13,8 @@ enum ctrl_keycodes {
 enum ctrl_layers {
     _DEFAULT,
     _FUNCTION,
-    _FF14
+    _FF14,
+    _COLEMAK
 };
 
 #define TG_NKRO MAGIC_TOGGLE_NKRO //Toggle 6KRO / NKRO mode
@@ -22,7 +23,7 @@ keymap_config_t keymap_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT(
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR,TO(_FF14),KC_PAUS, \
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, KC_PAUS, \
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
         KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT, \
@@ -30,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(1),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     [_FUNCTION] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_MPRV, KC_MPLY, KC_MNXT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_CALC, KC_NO,              RGB_TOG, BL_TOGG, BL_BRTG, \
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_MPRV, KC_MPLY, KC_MNXT, KC_NO,   KC_NO,   KC_CALC, KC_NO,              RGB_TOG, TG(_FF14), TG(_COLEMAK), \
         KC_NO,   RGB_SPD, RGB_SPI, RGB_VAD, RGB_VAI, KC_NO,   KC_NO,   KC_NO,   KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_NO,   KC_BSPC,   RGB_MOD, BL_INC,  KC_VOLU, \
         KC_NO,   KC_NO,   KC_BTN1, KC_MS_U, KC_BTN2, KC_NO,   KC_NO,   KC_NO,   KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_NO,   KC_NO,     RGB_RMOD,BL_DEC,  KC_VOLD, \
 MAGIC_UNSWAP_ALL,KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO,   KC_NO,   KC_P4,   KC_P5,   KC_P6,   KC_PDOT, KC_PENT,\
@@ -38,12 +39,20 @@ MAGIC_UNSWAP_ALL,KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO,   KC_NO,   
         MAGIC_SWAP_CONTROL_CAPSLOCK, KC_NO, MAGIC_SWAP_ALT_CAPSLOCK,   KC_NO,            KC_P0,   KC_TRNS, KC_NO, KC_NO,                RGB_HUD, RGB_SAD, RGB_HUI \
     ),
     [_FF14] = LAYOUT(
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,        KC_PSCR, TO(_DEFAULT), KC_PAUS, \
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, KC_PAUS, \
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
         KC_TAB,  KC_Q,    KC_F2,   KC_E,    KC_F3,   KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
         KC_LALT, KC_F1,   KC_S,    KC_D,    KC_F,    KC_F4,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT, \
         KC_LSFT, KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_LSFT,                              KC_UP, \
-        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(_FUNCTION),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(1),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
+    ),
+    [_COLEMAK] = LAYOUT(
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, KC_PAUS, \
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
+        KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
+        KC_CAPS, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_K,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, KC_ENT, \
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_M,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_LSFT,                              KC_UP, \
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(1),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     /*
     [X] = LAYOUT(
@@ -70,9 +79,9 @@ void rgb_matrix_indicators_user(void)
 				rgb_matrix_set_color(24, 0x00, 0x00, 0x00);
 			}
             // F-Keys
-			rgb_matrix_set_color(3,  0x66, 0xCC, 0xFF); // f3 (prev)
-			rgb_matrix_set_color(4,  0x66, 0xCC, 0xFF); // f4 (play/pause)
-			rgb_matrix_set_color(5,  0x66, 0xCC, 0xFF); // f5 (next)
+			rgb_matrix_set_color(6,  0x66, 0xCC, 0xFF); // f6 (prev)
+			rgb_matrix_set_color(7,  0x66, 0xCC, 0xFF); // f7 (play/pause)
+			rgb_matrix_set_color(8,  0x66, 0xCC, 0xFF); // f8 (next)
 			rgb_matrix_set_color(11, 0x66, 0xCC, 0xFF); // f11 (calc)
 
             // TKL Area
@@ -161,6 +170,10 @@ void rgb_matrix_indicators_user(void)
 			rgb_matrix_set_color(55, 0x21, 0xBD, 0xA9); // G - F4
 		    break;
 		    }
+        case _COLEMAK: {
+			rgb_matrix_set_color(14, 0xFF, 0xFF, 0xFF); // Pause; (show enabled)
+            break;
+            }
 		}
 	}
 }
